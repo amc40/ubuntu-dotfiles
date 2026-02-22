@@ -3,7 +3,7 @@ set -euxo pipefail
 
 USERNAME="${USERNAME:-$(whoami)}"
 USER_HOME="${USER_HOME:-$HOME}"
-DOTFILES_PATH="${DOTFILES_PATH:-$USER_HOME/ubuntu-dotfiles}"
+DOTFILES_PATH="${DOTFILES_PATH:-$(cd "$(dirname "$0")" && pwd)}"
 
 sudo apt-get update
 sudo apt-get install -y zsh wget git sudo

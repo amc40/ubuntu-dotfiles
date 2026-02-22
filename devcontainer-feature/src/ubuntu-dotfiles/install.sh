@@ -13,6 +13,5 @@ chown -R "$USERNAME:$USERNAME" "$USER_HOME/ubuntu-dotfiles"
 
 export USERNAME
 export USER_HOME
-export DOTFILES_PATH="$USER_HOME/ubuntu-dotfiles"
 
-bash "$USER_HOME/ubuntu-dotfiles/install.sh"
+bash "$USER_HOME/ubuntu-dotfiles/dotfiles/install.sh"
