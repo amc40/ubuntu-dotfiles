@@ -9,13 +9,13 @@ Run `./install.sh` to run the setup. Setup steps should be idempotent.
 A pre-built Docker image is published to the GitHub Container Registry:
 
 ```bash
-docker pull ghcr.io/alacho/ubuntu-dotfiles:latest
+docker pull ghcr.io/amc40/ubuntu-dotfiles:latest
 ```
 
 You can also specify a version:
 
 ```bash
-docker pull ghcr.io/alacho/ubuntu-dotfiles:1.0.0
+docker pull ghcr.io/amc40/ubuntu-dotfiles:1.0.0
 ```
 
 To build locally:
@@ -37,7 +37,7 @@ git tag v1.0.0
 git push origin v1.0.0
 ```
 
-This publishes the following tags to `ghcr.io/alacho/ubuntu-dotfiles`:
+This publishes the following tags to `ghcr.io/amc40/ubuntu-dotfiles`:
 - `1.0.0` — exact version
 - `1.0` — minor float
 - `1` — major float
