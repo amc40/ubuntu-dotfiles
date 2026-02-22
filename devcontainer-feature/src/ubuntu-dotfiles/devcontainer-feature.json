@@ -1,0 +1,9 @@
+{
+    "id": "ubuntu-dotfiles",
+    "version": "1.0.0",
+    "name": "Ubuntu Dotfiles",
+    "description": "Installs zsh, oh-my-zsh, and personal dotfiles configuration (agnoster theme).",
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}

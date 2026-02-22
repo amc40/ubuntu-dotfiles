@@ -9,14 +9,14 @@ ARG USERNAME=dev
 RUN useradd -m $USERNAME \
     && echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-USER $USERNAME
-
 ENV USER_HOME=/home/${USERNAME} \
     DOTFILES_PATH=/home/${USERNAME}/ubuntu-dotfiles
 
 COPY --chown=${USERNAME}:${USERNAME} . $DOTFILES_PATH
 
-RUN $DOTFILES_PATH/install.sh
+RUN USERNAME=${USERNAME} $DOTFILES_PATH/install.sh
+
+USER $USERNAME
 
 WORKDIR /home/${USERNAME}
 
