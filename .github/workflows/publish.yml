@@ -72,6 +72,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Sync dotfiles into feature source
+        run: make sync
+
       - name: Publish feature
         uses: devcontainers/action@v1
         with:

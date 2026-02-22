@@ -14,5 +14,6 @@ if [ ! -d "$USER_HOME/.oh-my-zsh" ]; then
 fi
 
 cp "$DOTFILES_PATH/.zshrc" "$USER_HOME/.zshrc"
+sudo chown "$USERNAME:$USERNAME" "$USER_HOME/.zshrc"
 
 sudo usermod -s "$(which zsh)" "$USERNAME"
