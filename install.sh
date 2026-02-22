@@ -16,5 +16,5 @@ fi
 
 (cd $DOTFILES_PATH && cat .zshrc > "$USER_HOME/.zshrc")
 
-chsh -s $(which zsh) $(whoami)
+sudo usermod -s $(which zsh) $(whoami)
 
