@@ -20,3 +20,5 @@ USER $USERNAME
 WORKDIR /home/${USERNAME}
 
 SHELL ["/bin/zsh", "-c"]
+
+ENTRYPOINT ["/usr/bin/zsh", "-l"]
