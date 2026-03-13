@@ -3,7 +3,11 @@ FROM ubuntu:$UBUNTU_VERSION
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get install -y sudo wget git
+# fixes agnoster oh-my-zsh theme issue
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+
+RUN apt-get update && apt-get install -y sudo wget git locales
 
 ARG USERNAME=dev
 RUN useradd -m $USERNAME \
