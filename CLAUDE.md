@@ -45,6 +45,7 @@ All three delivery mechanisms use the same underlying dotfiles and install scrip
 
 ## Testing
 
+### Automated
 ```bash
 make test
 ```
@@ -57,6 +58,11 @@ Runs devcontainer CLI tests against both Ubuntu 22.04 and latest. The test suite
 - .zshrc file ownership is correct
 
 Tests are defined in `/devcontainer-feature/test/ubuntu-dotfiles/test.sh`.
+
+### Manual
+Ensure that you're able to run:
+1. Run the dotfiles install script locally
+2. Build the image and see expected changes when running it
 
 ## Release Process
 
