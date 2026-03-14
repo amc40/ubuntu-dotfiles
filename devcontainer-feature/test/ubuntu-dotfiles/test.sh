@@ -36,4 +36,16 @@ if [ "$ZSHRC_OWNER" != "$(whoami)" ]; then
 fi
 echo "PASS: .zshrc is owned by the remote user"
 
+if ! command -v tmux &> /dev/null; then
+    echo "FAIL: tmux is not installed"
+    exit 1
+fi
+echo "PASS: tmux is installed"
+
+if [ "$(stat -c '%U' "$HOME/.tmux.conf")" != "$(whoami)" ]; then
+    echo "FAIL: .tmux.conf is not owned by $(whoami)"
+    exit 1
+fi
+echo "PASS: .tmux.conf is owned by the current user"
+
 echo "All tests passed!"
