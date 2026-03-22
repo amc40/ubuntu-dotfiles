@@ -48,4 +48,17 @@ if [ "$(stat -c '%U' "$HOME/.tmux.conf")" != "$(whoami)" ]; then
 fi
 echo "PASS: .tmux.conf is owned by the current user"
 
+if [ ! -d "$HOME/ubuntu-dotfiles/.git" ]; then
+    echo "FAIL: ubuntu-dotfiles is not a git repository"
+    exit 1
+fi
+echo "PASS: ubuntu-dotfiles is a git repository"
+
+REMOTE_URL="$(cd "$HOME/ubuntu-dotfiles" && git remote get-url origin)"
+if [ "$REMOTE_URL" != "https://github.com/amc40/ubuntu-dotfiles.git" ]; then
+    echo "FAIL: ubuntu-dotfiles remote is $REMOTE_URL, expected https://github.com/amc40/ubuntu-dotfiles.git"
+    exit 1
+fi
+echo "PASS: ubuntu-dotfiles has correct remote configured"
+
 echo "All tests passed!"
