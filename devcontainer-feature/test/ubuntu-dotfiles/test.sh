@@ -61,4 +61,23 @@ if [ "$REMOTE_URL" != "https://github.com/amc40/ubuntu-dotfiles.git" ]; then
 fi
 echo "PASS: ubuntu-dotfiles has correct remote configured"
 
+workspace_file="$HOME/workspace.code-workspace"
+if [ ! -f "$workspace_file" ]; then
+    echo "FAIL: workspace.code-workspace not created at $workspace_file"
+    exit 1
+fi
+echo "PASS: workspace.code-workspace created"
+
+if ! grep -q '"path": "."' "$workspace_file"; then
+    echo "FAIL: workspace.code-workspace does not include root folder"
+    exit 1
+fi
+echo "PASS: workspace.code-workspace includes root folder"
+
+if ! grep -q "ubuntu-dotfiles" "$workspace_file"; then
+    echo "FAIL: workspace.code-workspace does not include ubuntu-dotfiles"
+    exit 1
+fi
+echo "PASS: workspace.code-workspace includes ubuntu-dotfiles"
+
 echo "All tests passed!"
