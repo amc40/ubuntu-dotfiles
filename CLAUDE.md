@@ -82,6 +82,10 @@ GitHub Actions automatically:
 - Publishes Docker image to GHCR with tags: `1.2.3`, `1.2`, `1`, `latest`
 - Publishes devcontainer feature to the registry
 
+## Architectural Decisions
+
+See [DECISIONS.md](./DECISIONS.md) for design decisions including devcontainer feature artifact strategy.
+
 ## Guidelines
 
 @dotfiles/.claude/CLAUDE.md

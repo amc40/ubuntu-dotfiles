@@ -5,13 +5,15 @@ USERNAME="${_REMOTE_USER:-root}"
 USER_HOME="${_REMOTE_USER_HOME:-$(getent passwd "$USERNAME" | cut -d: -f6)}"
 
 apt-get update
-apt-get install -y sudo
+apt-get install -y sudo git
 
-mkdir -p "$USER_HOME/ubuntu-dotfiles"
-tar -xzf dotfiles.tar.gz -C "$USER_HOME/ubuntu-dotfiles"
-chown -R "$USERNAME:$USERNAME" "$USER_HOME/ubuntu-dotfiles"
+# Extract dotfiles to temp directory
+temp_dir=$(mktemp -d)
+trap "rm -rf '$temp_dir'" EXIT
+
+tar -xzf dotfiles.tar.gz -C "$temp_dir"
 
 export USERNAME
 export USER_HOME
 
-bash "$USER_HOME/ubuntu-dotfiles/dotfiles/install.sh"
+bash "$temp_dir/dotfiles/install.sh"

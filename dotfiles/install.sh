@@ -42,7 +42,7 @@ sudo chown "$USERNAME:$USERNAME" "$USER_HOME/.tmux.conf"
 
 ## GIT
 
-git_root="$(cd "$DOTFILES_PATH/.." && pwd)"
-if [ ! -d "$git_root/.git" ]; then
-    su "$USERNAME" -c "cd '$git_root' && git init && git remote add origin git@github.com:amc40/ubuntu-dotfiles.git"
+repo_path="$USER_HOME/ubuntu-dotfiles"
+if [ ! -d "$repo_path" ]; then
+    su "$USERNAME" -c "git clone https://github.com/amc40/ubuntu-dotfiles.git '$repo_path'"
 fi
