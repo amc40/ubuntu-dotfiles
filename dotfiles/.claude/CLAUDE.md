@@ -16,6 +16,12 @@
     4. Check for documentation for dependencies, whether that's part of the package, or online. Prefer those which have clear documentation
 2. Dependency versions should be pinned wherever possible
 
+## PRs
+
+### GitHub
+1. After raising a PR ensure that the checks are passing (use a `CronCreate` to check every 10s)
+2. PRs should include links to any GH issues they address
+
 ## Shell/Bash commands
 1. Prefer composition of tools with chaining over custom scripts / complex arguments
 2. For parsing data formats prefer purpose-built tools (e.g. `jq`, `yq`) over custom scripts
