@@ -89,3 +89,7 @@ See [DECISIONS.md](./DECISIONS.md) for design decisions including devcontainer f
 ## Guidelines
 
 @dotfiles/.claude/CLAUDE.md
+
+## Git
+
+1. Do not use `--fixup` commits in this repository
