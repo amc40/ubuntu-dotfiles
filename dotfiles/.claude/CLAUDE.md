@@ -19,7 +19,7 @@
 ## PRs
 
 ### GitHub
-1. After raising a PR ensure that the checks are passing (use a `CronCreate` to check every 10s)
+1. After raising a PR ensure that the checks are passing (use a `CronCreate` to check every 10s), use `CronDelete` to delete it once we know what the status is. Investigate any failures by looking at the logs with `gh run view`
 2. PRs should include links to any GH issues they address
 
 ## Shell/Bash commands
