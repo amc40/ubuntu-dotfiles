@@ -8,6 +8,14 @@
 1. Only add comments if they are necessary for explaining **why** something needs done a certain way, not **what** is being done
 2. Only skip linting rules if you've thought carefully about alternatives, and can articulate why disabling is the best option in a comment
 
+## Dependencies
+1. When bringing in a dependency, consider whether:
+    1. There are alternatives with similar functionality, if so consider presenting the alternatives in a plan
+    2. I strongly perfer typed interfaces, prefer these if there is similar functionality
+    3. Try not to bring in poorly maintained or deprecated dependencies
+    4. Check for documentation for dependencies, whether that's part of the package, or online. Prefer those which have clear documentation
+2. Dependency versions should be pinned wherever possible
+
 ## Shell/Bash commands
 1. Prefer composition of tools with chaining over custom scripts / complex arguments
 2. For parsing data formats prefer purpose-built tools (e.g. `jq`, `yq`) over custom scripts
