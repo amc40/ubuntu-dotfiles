@@ -26,6 +26,14 @@
 1. Prefer composition of tools with chaining over custom scripts / complex arguments
 2. For parsing data formats prefer purpose-built tools (e.g. `jq`, `yq`) over custom scripts
 
+### Unsafe commands and replacements
+
+Unless absolutely necessary do NOT use the commands in the `Avoid` column below.
+
+| Avoid                 | Use instead | Reason                                                                            |
+|-----------------------|-------------|-----------------------------------------------------------------------------------|
+| `find` (with `-exec`) | `fd`        | `-exec` allows arbitrary command execution; `fd` has safer, purpose-built actions |
+
 ## Investigation
 1. When summarising your findings include references, and double check these!
 
