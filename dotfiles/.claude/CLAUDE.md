@@ -21,6 +21,7 @@
 ### GitHub
 1. After raising a PR ensure that the checks are passing (use a `CronCreate` to check every 10s), use `CronDelete` to delete it once we know what the status is. Investigate any failures by looking at the logs with `gh run view`
 2. PRs should include links to any GH issues they address
+3. Before raising a pr run `/review` if it hasn't been run recently to check if we've missed anything
 
 ## Shell/Bash commands
 1. Prefer composition of tools with chaining over custom scripts / complex arguments
