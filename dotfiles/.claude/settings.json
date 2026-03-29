@@ -14,6 +14,7 @@
       "Bash(docker ps *)",
       "Bash(docker build *)",
       "Bash(docker logs *)",
+      "Bash(docker compose ps *)",
       "Bash(gh * --help)",
       "Bash(gh issue list *)",
       "Bash(gh issue view *)",
