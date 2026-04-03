@@ -38,4 +38,5 @@ Unless absolutely necessary do NOT use the commands in the `Avoid` column below.
 1. When summarising your findings include references, and double check these!
 
 ## Git
-1. When making markups, make them as `--fixup` commits (no need to specify a message for these), so they can be autosquashed
+1. When making markups relating to an existing commit, make them as `--fixup` commits (no need to specify a message for these), so they can be autosquashed
+2. When about to make changes not in a worktree, ask if you should create a worktree to make those changes
