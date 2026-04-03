@@ -40,3 +40,4 @@ Unless absolutely necessary do NOT use the commands in the `Avoid` column below.
 ## Git
 1. When making markups relating to an existing commit, make them as `--fixup` commits (no need to specify a message for these), so they can be autosquashed
 2. When about to make changes not in a worktree, ask if you should create a worktree to make those changes
+3. Never use `cd` and `git` in the same `Bash()` tool invocation. Change your working directory first
