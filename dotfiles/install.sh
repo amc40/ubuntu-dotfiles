@@ -33,6 +33,8 @@ cp "$DOTFILES_PATH/.claude/settings.json" "$USER_HOME/.claude/settings.json"
 cp "$DOTFILES_PATH/.claude/CLAUDE.md" "$USER_HOME/.claude/CLAUDE.md"
 sudo chown -R "$USERNAME:$USERNAME" "$USER_HOME/.claude"
 
+cp "$DOTFILES_PATH/.claude/.claude.json" "$USER_HOME/.claude/.claude.json"
+ln -sf ~/.claude/.claude.json ~/.claude.json
 
 ## TMUX
 
