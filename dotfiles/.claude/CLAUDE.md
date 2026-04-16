@@ -33,7 +33,6 @@ Unless absolutely necessary do NOT use the commands in the `Avoid` column below.
 
 | Avoid                 | Use instead | Reason                                                                            |
 |-----------------------|-------------|-----------------------------------------------------------------------------------|
-| `find` (with `-exec`) | `fd`        | `-exec` allows arbitrary command execution; `fd` has safer, purpose-built actions |
 
 ## Investigation
 1. When summarising your findings include references, and double check these!
