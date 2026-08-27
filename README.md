@@ -4,6 +4,20 @@ Repository that sets up common config files in my home directory (dotfiles) for 
 
 Run `./install.sh` to run the setup. Setup steps should be idempotent.
 
+## Devcontainer feature
+
+The feature installs Claude Code by default. Select Codex or skip coding-agent installation with its `agent` option:
+
+```json
+{
+  "features": {
+    "ghcr.io/amc40/ubuntu-dotfiles:latest": {
+      "agent": "codex"
+    }
+  }
+}
+```
+
 ## Docker
 
 A pre-built Docker image is published to the GitHub Container Registry:
