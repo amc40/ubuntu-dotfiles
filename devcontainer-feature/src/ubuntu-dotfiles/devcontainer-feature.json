@@ -1,12 +1,16 @@
 {
   "id": "ubuntu-dotfiles",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "name": "Ubuntu Dotfiles",
   "description": "Installs zsh, oh-my-zsh, optional Claude Code or Codex, and personal dotfiles configuration (agnoster theme).",
   "options": {
     "agent": {
       "type": "string",
-      "enum": ["claude", "codex", "none"],
+      "enum": [
+        "claude",
+        "codex",
+        "none"
+      ],
       "default": "claude",
       "description": "Coding agent to install and configure."
     }
