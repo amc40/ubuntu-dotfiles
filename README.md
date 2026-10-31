@@ -41,6 +41,29 @@ The feature installs Claude Code by default. Select Codex or skip coding-agent i
 }
 ```
 
+Each part can be turned off. These options map to the `install.sh` components above:
+
+| Option | Default | Component |
+| --- | --- | --- |
+| `agent` | `claude` | `claude`, `codex`, or `none` |
+| `installZsh` | `true` | `zsh` |
+| `installTmux` | `true` | `tmux` |
+| `cloneRepo` | `true` | `repo` (also adds it to the VS Code workspace) |
+
+For example, just the Claude config:
+
+```json
+{
+  "features": {
+    "ghcr.io/amc40/ubuntu-dotfiles:latest": {
+      "installZsh": false,
+      "installTmux": false,
+      "cloneRepo": false
+    }
+  }
+}
+```
+
 ## Docker
 
 A pre-built Docker image is published to the GitHub Container Registry:

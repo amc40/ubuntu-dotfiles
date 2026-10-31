@@ -2,7 +2,7 @@
   "id": "ubuntu-dotfiles",
   "version": "1.8.0",
   "name": "Ubuntu Dotfiles",
-  "description": "Installs zsh, oh-my-zsh, optional Claude Code or Codex, and personal dotfiles configuration (agnoster theme).",
+  "description": "Installs zsh, oh-my-zsh, tmux, an optional coding agent (Claude Code or Codex) and personal dotfiles configuration. Each part can be turned off.",
   "options": {
     "agent": {
       "type": "string",
@@ -13,6 +13,21 @@
       ],
       "default": "claude",
       "description": "Coding agent to install and configure."
+    },
+    "installZsh": {
+      "type": "boolean",
+      "default": true,
+      "description": "Install zsh and oh-my-zsh, make zsh the default shell and install .zshrc."
+    },
+    "installTmux": {
+      "type": "boolean",
+      "default": true,
+      "description": "Install tmux and .tmux.conf."
+    },
+    "cloneRepo": {
+      "type": "boolean",
+      "default": true,
+      "description": "Clone ubuntu-dotfiles to ~/ubuntu-dotfiles and add it to the VS Code workspace."
     }
   },
   "installsAfter": [
