@@ -12,6 +12,7 @@ sync:
 		-C . .
 
 test-install:
+	./test/consistency.sh
 	./test/install.sh
 
 test: test-install sync

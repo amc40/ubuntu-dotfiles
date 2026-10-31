@@ -38,6 +38,7 @@ while [ $# -gt 0 ]; do
     case "$1" in
         --only) only="${2:?--only needs a value}"; shift 2 ;;
         --skip) skip="${2:?--skip needs a value}"; shift 2 ;;
+        --list-components) printf '%s\n' $KNOWN_COMPONENTS; exit 0 ;;
         -h|--help) usage; exit 0 ;;
         *) echo "Unknown argument: $1" >&2; usage >&2; exit 1 ;;
     esac
@@ -217,9 +218,10 @@ install_repo() {
     fi
 }
 
-wants zsh && install_zsh
-wants claude && install_claude
-wants codex && install_codex
-wants tmux && install_tmux
-wants repo && install_repo
-true
+# Dispatching from KNOWN_COMPONENTS means a component added to the list without
+# an install_<name> function fails loudly instead of being silently skipped.
+for component in $KNOWN_COMPONENTS; do
+    if wants "$component"; then
+        "install_$component"
+    fi
+done

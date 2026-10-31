@@ -25,6 +25,15 @@ The devcontainer feature is defined in `/devcontainer-feature/src/ubuntu-dotfile
 
 Run `make test`. It tests the devcontainer feature on Ubuntu 22.04 and the latest Ubuntu release.
 
+## Adding or Removing a Component
+
+`KNOWN_COMPONENTS` in `dotfiles/install.sh` is the source of truth. When changing it, also update:
+- an `install_<name>` function in `dotfiles/install.sh`
+- the component and option tables in `README.md`
+- for non-agent components, a boolean option in `devcontainer-feature/src/ubuntu-dotfiles/devcontainer-feature.json`, its `--skip` line in the feature's `install.sh`, and a scenario in `devcontainer-feature/test/ubuntu-dotfiles/scenarios.json` that disables it
+
+`test/consistency.sh` (run by `make test` and CI) fails until these agree. Do not name an option `zsh` or `tmux`: devcontainer exposes options as environment variables and these clash with oh-my-zsh and tmux.
+
 ## Release Process
 
 Run `make release VERSION=1.2.3`. This updates the feature version, creates and pushes a semver tag, and triggers GitHub Actions to test and publish the Docker image and devcontainer feature.
