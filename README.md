@@ -14,7 +14,7 @@ Run `./install.sh` to run the setup. Setup steps should be idempotent.
 ./install.sh --skip zsh,repo      # defaults minus these
 ```
 
-`--only` and `--skip` can't be combined. Claude config is merged into any existing `~/.claude/settings.json` (permission lists are unioned) and an existing `~/.claude.json` is left alone, so it is safe to run inside a session that already has its own state.
+`--only` and `--skip` can't be combined. Claude config is merged into any existing `~/.claude/settings.json`: `permissions.allow` and `permissions.deny` are unioned, and for any other key present in both the dotfiles value wins. An existing `~/.claude.json` is left alone.
 
 ## Claude cloud sessions
 

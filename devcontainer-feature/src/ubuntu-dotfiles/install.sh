@@ -34,7 +34,7 @@ if [ -n "$skip" ]; then
     install_args=(--skip "$skip")
 fi
 
-bash "$temp_dir/dotfiles/install.sh" "${install_args[@]}"
+bash "$temp_dir/dotfiles/install.sh" ${install_args[@]+"${install_args[@]}"}
 
 # Create VS Code workspace file
 # This will be symlinked or used from the workspace root when VS Code opens the folder

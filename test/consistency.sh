@@ -32,7 +32,7 @@ agents="$(jq -r '.options.agent.enum[] | select(. != "none")' "$FEATURE_JSON")"
 
 for component in $components; do
     check "$component: has an install_$component function" grep -q "^install_$component()" "$INSTALL"
-    check "$component: documented in README" grep -q "\`$component\`" "$README"
+    check "$component: documented in README" grep -q "^|.*\`$component\`" "$README"
 
     if grep -qx "$component" <<< "$agents"; then
         check "$component: selectable via the feature's agent option" true
@@ -44,7 +44,7 @@ for component in $components; do
     check "$component: feature install.sh maps an option to --skip" test -n "$env_var"
     option="$(jq -r --arg v "$env_var" '.options | keys[] | select(ascii_upcase == $v)' "$FEATURE_JSON")"
     check "$component: feature declares the $env_var option" test -n "$option"
-    check "$component: option documented in README" grep -q "\`$option\`" "$README"
+    check "$component: option documented in README" grep -q "^|.*\`$option\`" "$README"
     check "$component: option disabled in a feature scenario" \
         jq -e --arg o "$option" '[.[].features["ubuntu-dotfiles"][$o]] | any(. == false)' "$SCENARIOS"
 done

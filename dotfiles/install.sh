@@ -64,6 +64,10 @@ validate_components "$skip"
 
 if [ -n "$only" ]; then
     components="${only//,/ }"
+    if [ -z "${components// /}" ]; then
+        echo "--only needs at least one component" >&2
+        exit 1
+    fi
 else
     components=""
     for name in $default_components; do
@@ -150,8 +154,12 @@ install_claude_settings() {
     # Always going through jq keeps the output byte-identical between the first
     # run and re-runs.
     local existing='{}'
-    if [ -f "$dest" ]; then
+    if [ -s "$dest" ]; then
         existing="$(cat "$dest")"
+    fi
+    if ! jq -e 'type == "object"' <<< "$existing" > /dev/null; then
+        echo "$dest is not a JSON object; fix or remove it and re-run" >&2
+        return 1
     fi
     local merged
     merged="$(mktemp)"
@@ -161,7 +169,7 @@ install_claude_settings() {
         (.[0] * .[1])
         | .permissions.allow = ($a0 + $a1 | unique)
         | .permissions.deny = ($d0 + $d1 | unique)
-    ' <(echo "$existing") "$source" > "$merged"
+    ' <(echo "$existing") "$source" > "$merged" || { rm -f "$merged"; return 1; }
     mv "$merged" "$dest"
 }
 
@@ -181,7 +189,7 @@ install_claude() {
     if [ ! -e "$USER_HOME/.claude/.claude.json" ]; then
         cp "$DOTFILES_PATH/.claude/.claude.json" "$USER_HOME/.claude/.claude.json"
     fi
-    if [ ! -e "$USER_HOME/.claude.json" ]; then
+    if [ ! -e "$USER_HOME/.claude.json" ] && [ ! -L "$USER_HOME/.claude.json" ]; then
         ln -s "$USER_HOME/.claude/.claude.json" "$USER_HOME/.claude.json"
     fi
     own "$USER_HOME/.claude"
