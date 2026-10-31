@@ -1,4 +1,4 @@
-.PHONY: test sync release
+.PHONY: test test-install sync release
 
 FEATURE_PROJECT_FOLDER := devcontainer-feature
 FEATURE_NAME := ubuntu-dotfiles
@@ -8,9 +8,14 @@ sync:
 	tar -czf $(FEATURE_PROJECT_FOLDER)/src/$(FEATURE_NAME)/dotfiles.tar.gz \
 		--exclude='./devcontainer-feature' \
 		--exclude='./.git' \
+		--exclude='./test' \
 		-C . .
 
-test: sync
+test-install:
+	./test/consistency.sh
+	./test/install.sh
+
+test: test-install sync
 	$(foreach image,$(BASE_IMAGES), \
 		npx @devcontainers/cli features test \
 			--project-folder $(FEATURE_PROJECT_FOLDER) \
