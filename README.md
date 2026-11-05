@@ -14,7 +14,7 @@ Run `./install.sh` to run the setup. Setup steps should be idempotent.
 ./install.sh --skip zsh,repo      # defaults minus these
 ```
 
-The `claude` component also installs every skill under `dotfiles/.claude/skills/` into `~/.claude/skills/`, leaving any other skills already there alone.
+The `claude` component also installs every skill under `dotfiles/.claude/skills/` into `~/.claude/skills/`, leaving any other skills already there alone. Likewise every subagent under `dotfiles/.claude/agents/` goes into `~/.claude/agents/`.
 
 `--only` and `--skip` can't be combined. Claude config is merged into any existing `~/.claude/settings.json`: `permissions.allow` and `permissions.deny` are unioned, and for any other key present in both the dotfiles value wins. An existing `~/.claude.json` is left alone.
 

@@ -50,6 +50,12 @@ for skill_dir in "$REPO_ROOT"/dotfiles/.claude/skills/*/; do
     check "skill $skill files match the source" diff -r "$skill_dir" "$HOME_DIR/.claude/skills/$skill"
 done
 
+# Subagents are discovered from the source tree so adding one needs no test change.
+for agent_file in "$REPO_ROOT"/dotfiles/.claude/agents/*.md; do
+    agent="$(basename "$agent_file")"
+    check "subagent $agent installed and matches the source" diff "$agent_file" "$HOME_DIR/.claude/agents/$agent"
+done
+
 before="$(find "$HOME_DIR" -type f -exec md5sum {} + | sort)"
 run_install --only claude
 after="$(find "$HOME_DIR" -type f -exec md5sum {} + | sort)"
