@@ -184,6 +184,12 @@ install_claude() {
     install_claude_settings
     cp "$DOTFILES_PATH/.claude/CLAUDE.md" "$USER_HOME/.claude/CLAUDE.md"
     cp "$DOTFILES_PATH/.claude/AGENTS.md" "$USER_HOME/.claude/AGENTS.md"
+    # Copies over, rather than replacing the directory, so skills installed by
+    # other means survive.
+    if [ -d "$DOTFILES_PATH/.claude/skills" ]; then
+        mkdir -p "$USER_HOME/.claude/skills"
+        cp -R "$DOTFILES_PATH/.claude/skills/." "$USER_HOME/.claude/skills/"
+    fi
 
     # ~/.claude.json holds Claude Code's own state, so never replace an existing one.
     if [ ! -e "$USER_HOME/.claude/.claude.json" ]; then

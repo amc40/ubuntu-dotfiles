@@ -43,6 +43,13 @@ check ".tmux.conf not installed" test ! -e "$HOME_DIR/.tmux.conf"
 check "oh-my-zsh not installed" test ! -e "$HOME_DIR/.oh-my-zsh"
 check "ubuntu-dotfiles repo not cloned" test ! -e "$HOME_DIR/ubuntu-dotfiles"
 
+# Skills are discovered from the source tree so adding one needs no test change.
+for skill_dir in "$REPO_ROOT"/dotfiles/.claude/skills/*/; do
+    skill="$(basename "$skill_dir")"
+    check "skill $skill installed" test -f "$HOME_DIR/.claude/skills/$skill/SKILL.md"
+    check "skill $skill files match the source" diff -r "$skill_dir" "$HOME_DIR/.claude/skills/$skill"
+done
+
 before="$(find "$HOME_DIR" -type f -exec md5sum {} + | sort)"
 run_install --only claude
 after="$(find "$HOME_DIR" -type f -exec md5sum {} + | sort)"
