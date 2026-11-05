@@ -23,7 +23,16 @@ exception.
 | Dependencies | Unused, missing and misplaced dependencies; lockfile in sync; cycles banned. |
 | Security | Secret scanning, dependency vulnerabilities, static analysis of code, CI workflows and containers, all pinned and scheduled (see [CI and supply chain](references/ci-and-supply-chain.md)). |
 | Tests | A pyramid with a coverage floor per layer, branch coverage, warnings as errors, strict markers, no skipped tests without an issue link. |
-| Docs for agents | `AGENTS.md` listing the commands and rules, and `CLAUDE.md` containing only `@AGENTS.md`. |
+| Docs for agents | `AGENTS.md` at the root listing the commands and rules. No `CLAUDE.md`: Claude Code reads `AGENTS.md` directly (v2.1.277+), and any `CLAUDE.md` in or above the working directory makes it ignore `AGENTS.md` unless that file imports it. |
+
+## Default frameworks
+
+- **Websites:** Astro with TypeScript, see [Astro](references/astro.md).
+- **MCP servers:** FastMCP in Python, see [FastMCP](references/fastmcp.md).
+
+Use these unless the repo already uses something else or the request names an
+alternative. If a requirement does not fit, say why before choosing another
+framework.
 
 Stack specifics: [TypeScript and React](references/typescript.md),
 [Python](references/python.md). For any other stack, find the equivalent of
@@ -63,8 +72,8 @@ each row (for example `golangci-lint` with most linters enabled, `clippy` with
    layer *first*, then the first real code. The first commit must pass
    `make check`.
 3. Add `.editorconfig`, `.gitignore`, `.pre-commit-config.yaml`,
-   `dependabot.yml`, the CI workflow, `AGENTS.md`, `CLAUDE.md` and, for
-   containerised work, a devcontainer.
+   `dependabot.yml`, the CI workflow, `AGENTS.md` and, for containerised work,
+   a devcontainer.
 4. Install the hooks (`make install`) and run `make check` from a clean clone
    before finishing.
 
