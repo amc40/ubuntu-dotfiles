@@ -59,6 +59,22 @@ for agent in $agents; do
     check "agent $agent: is an install.sh component" grep -qx "$agent" <<< "$components"
 done
 
+# Skills are loaded by name from their directory, so a mismatch silently hides one.
+SKILLS_DIR="$REPO_ROOT/dotfiles/.claude/skills"
+for skill_file in "$SKILLS_DIR"/*/SKILL.md; do
+    [ -e "$skill_file" ] || continue
+    skill_dir="$(dirname "$skill_file")"
+    skill="$(basename "$skill_dir")"
+    frontmatter="$(sed -n '1{/^---$/!q};1,/^---$/p' "$skill_file" | sed '1d;$d')"
+    check "skill $skill: frontmatter name matches its directory" \
+        grep -qx "name: $skill" <<< "$frontmatter"
+    check "skill $skill: has a description" grep -q '^description: .\+' <<< "$frontmatter"
+    # Relative links like references/x.md must resolve, or the agent follows a dead pointer.
+    for link in $(grep -o '(references/[^)]*)' "$skill_file" | tr -d '()'); do
+        check "skill $skill: $link exists" test -f "$skill_dir/$link"
+    done
+done
+
 if [ "$failures" -ne 0 ]; then
     echo "$failures check(s) failed"
     exit 1

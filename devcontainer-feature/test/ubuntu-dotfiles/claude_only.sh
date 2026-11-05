@@ -11,6 +11,18 @@ for file in settings.json AGENTS.md; do
 done
 echo "PASS: Claude config installed"
 
+if [ ! -f "$HOME/.claude/skills/repo-scaffolding/SKILL.md" ]; then
+    echo "FAIL: the repo-scaffolding skill was not installed"
+    exit 1
+fi
+echo "PASS: Claude skills installed"
+
+if ! find "$HOME/.claude/skills" -name SKILL.md -type f 2>/dev/null | grep -q .; then
+    echo "FAIL: no Claude skills were installed under ~/.claude/skills"
+    exit 1
+fi
+echo "PASS: Claude skills installed"
+
 for path in .zshrc .oh-my-zsh .tmux.conf ubuntu-dotfiles; do
     if [ -e "$HOME/$path" ]; then
         echo "FAIL: ~/$path should not exist"
