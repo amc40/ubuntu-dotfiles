@@ -16,6 +16,7 @@
 1. After raising a PR, ensure checks pass and investigate failures with `gh run view`.
 2. PRs should link to any GitHub issues they address.
 3. Before raising a PR, run an available code review workflow if one has not been run recently.
+4. Commit fixes for review findings as `--fixup` commits, then autosquash them (`GIT_SEQUENCE_EDITOR=true git rebase -i --autosquash <base>`) and update the branch with `git push --force-with-lease`.
 
 ## Shell/Bash commands
 1. Prefer composed tools over custom scripts or complex arguments.
