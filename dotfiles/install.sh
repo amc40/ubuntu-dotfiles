@@ -189,6 +189,10 @@ install_claude() {
         mkdir -p "$USER_HOME/.claude/skills"
         cp -R "$DOTFILES_PATH/.claude/skills/." "$USER_HOME/.claude/skills/"
     fi
+    if [ -d "$DOTFILES_PATH/.claude/agents" ]; then
+        mkdir -p "$USER_HOME/.claude/agents"
+        cp -R "$DOTFILES_PATH/.claude/agents/." "$USER_HOME/.claude/agents/"
+    fi
 
     # ~/.claude.json holds Claude Code's own state, so never replace an existing one.
     if [ ! -e "$USER_HOME/.claude/.claude.json" ]; then

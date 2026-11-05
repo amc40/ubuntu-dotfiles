@@ -75,6 +75,16 @@ for skill_file in "$SKILLS_DIR"/*/SKILL.md; do
     done
 done
 
+# Subagents are loaded by name, so a mismatch with the filename silently hides one.
+for agent_file in "$REPO_ROOT"/dotfiles/.claude/agents/*.md; do
+    [ -e "$agent_file" ] || continue
+    subagent="$(basename "$agent_file" .md)"
+    frontmatter="$(sed -n '1{/^---$/!q};1,/^---$/p' "$agent_file" | sed '1d;$d')"
+    check "subagent $subagent: frontmatter name matches its filename" \
+        grep -qx "name: $subagent" <<< "$frontmatter"
+    check "subagent $subagent: has a description" grep -q '^description: .\+' <<< "$frontmatter"
+done
+
 if [ "$failures" -ne 0 ]; then
     echo "$failures check(s) failed"
     exit 1
