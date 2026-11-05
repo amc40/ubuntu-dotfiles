@@ -54,9 +54,17 @@ because the change may create overlaps or stale references elsewhere.
   whether it loads, so write it with the neighbours in view.
 - **Principles over mechanics.** State what must be true and why. Name tools or
   exact steps only where the owner has standardised on them.
-- **Short.** One focused purpose. Put detail that is only sometimes needed in a
-  separate file in the skill's directory, linked from `SKILL.md`, so it loads
-  only when needed.
+- **Progressive disclosure.** `SKILL.md` holds only what every use of the
+  skill needs: the purpose, the principles and the workflow. Anything relevant
+  to only some uses (a particular stack, a rarely taken branch, long examples,
+  reference tables) goes in a separate file in the skill's directory and is
+  loaded only when needed. One focused purpose per skill.
+- **Signpost, don't inline.** Where `SKILL.md` would need that detail, link to
+  the file and say when to read it ("for a Python project, read
+  `references/python.md`"), so the agent can tell at a glance whether to open
+  it. Link directly from `SKILL.md`, one level deep, and keep each file
+  focused on one topic. Test each sentence in `SKILL.md`: if some uses of the
+  skill would not need it, move it out and signpost it.
 - **Repo conventions:** a skill lives at
   `dotfiles/.claude/skills/<name>/SKILL.md`, its `name` matches its directory,
   and the `claude` component of `install.sh` installs it. `test/consistency.sh`
