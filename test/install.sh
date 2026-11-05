@@ -36,7 +36,7 @@ run_install() {
 new_home
 check "--only claude succeeds" run_install --only claude
 check "settings.json installed" test -f "$HOME_DIR/.claude/settings.json"
-check "CLAUDE.md installed" test -f "$HOME_DIR/.claude/CLAUDE.md"
+check "CLAUDE.md not installed" test ! -e "$HOME_DIR/.claude/CLAUDE.md"
 check "AGENTS.md installed" test -f "$HOME_DIR/.claude/AGENTS.md"
 check ".zshrc not installed" test ! -e "$HOME_DIR/.zshrc"
 check ".tmux.conf not installed" test ! -e "$HOME_DIR/.tmux.conf"

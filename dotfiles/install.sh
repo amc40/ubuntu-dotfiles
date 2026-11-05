@@ -182,7 +182,6 @@ install_claude() {
 
     mkdir -p "$USER_HOME/.claude"
     install_claude_settings
-    cp "$DOTFILES_PATH/.claude/CLAUDE.md" "$USER_HOME/.claude/CLAUDE.md"
     cp "$DOTFILES_PATH/.claude/AGENTS.md" "$USER_HOME/.claude/AGENTS.md"
 
     # ~/.claude.json holds Claude Code's own state, so never replace an existing one.
