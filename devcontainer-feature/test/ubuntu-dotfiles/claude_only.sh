@@ -3,7 +3,7 @@ set -e
 
 echo "Testing ubuntu-dotfiles feature with only the Claude config..."
 
-for file in settings.json CLAUDE.md AGENTS.md; do
+for file in settings.json AGENTS.md; do
     if [ ! -f "$HOME/.claude/$file" ]; then
         echo "FAIL: ~/.claude/$file was not installed"
         exit 1

@@ -16,7 +16,7 @@ This repository packages Ubuntu dotfiles as standalone dotfiles, a Docker image,
 
 The `/dotfiles/` directory is the source of truth:
 - `install.sh` installs zsh, oh-my-zsh, an optional coding agent, and configuration files.
-- `.claude/` contains Claude Code settings and an instruction entry point.
+- `.claude/` contains Claude Code settings and instructions.
 - `.codex/` contains Codex global instructions and configuration.
 
 The devcontainer feature is defined in `/devcontainer-feature/src/ubuntu-dotfiles/`. Its `install.sh` extracts the dotfiles archive and invokes the shared installer.
