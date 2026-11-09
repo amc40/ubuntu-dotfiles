@@ -22,7 +22,7 @@
 
 ## Shell/Bash commands
 1. Prefer composed tools over custom scripts or complex arguments.
-2. For data formats, prefer purpose-built tools such as `jq` and `yq`.
+2. Before choosing, installing or invoking a tool, follow the `tooling-preferences` skill.
 
 ## Investigation
 1. Include references in findings and double-check them.

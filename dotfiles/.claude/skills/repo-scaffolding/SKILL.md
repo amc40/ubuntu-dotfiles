@@ -9,9 +9,9 @@ Maximise **automated** quality gates, so review spends its time on design
 rather than on style, types or missing tests. A rule that lives only in a
 document or in someone's head is not a gate.
 
-These are principles, not a toolchain. Pick the strictest, best-supported tool
-for the ecosystem and record the choice in `AGENTS.md`; don't ask which to use.
-The owner will standardise on specific tools when they want to.
+These are principles, not a toolchain. Use the tool the `tooling-preferences`
+skill names; where it is silent, pick the strictest, best-supported tool for
+the ecosystem and record the choice in `AGENTS.md`; don't ask which to use.
 
 ## Gates
 
