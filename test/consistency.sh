@@ -90,27 +90,20 @@ done
 PATTERNS_DIR="$SKILLS_DIR/code-patterns/patterns"
 FIXTURES_DIR="$REPO_ROOT/test/fixtures/patterns"
 
-# The runner's yq (mikefarah) and the Python yq differ in syntax and default
-# output format, so only the conversion to JSON is yq-specific; jq does the checking.
-frontmatter_json() {
-    local frontmatter
-    frontmatter="$(sed -n '1{/^---$/!q};1,/^---$/p' "$1" | sed '1d;$d')"
-    if yq --version 2>&1 | grep -qi mikefarah; then
-        yq -o=json '.' <<< "$frontmatter"
-    else
-        yq '.' <<< "$frontmatter"
-    fi
-}
+PATTERN_SCHEMA="$SKILLS_DIR/code-patterns/references/pattern.schema.json"
+SCRATCH="$(mktemp -d)"
+trap 'rm -rf "$SCRATCH"' EXIT
 
+# The schema holds the field rules; the filename match is the one rule JSON Schema
+# cannot express. check-jsonschema reads YAML directly, which avoids depending on
+# whichever yq the machine happens to have.
 validate_pattern() {
-    local name
+    local name frontmatter
     name="$(basename "$1" .md)"
-    frontmatter_json "$1" | jq -e --arg name "$name" '
-        type == "object"
-        and ((keys - ["name", "applies_when", "principle", "smells", "not_a_violation", "finding_format"]) | length == 0)
-        and .name == $name
-        and ([.applies_when, .principle, .finding_format] | all(type == "string" and length > 0))
-        and ([.smells, .not_a_violation] | all(type == "array" and length > 0 and all(type == "string" and length > 0)))'
+    frontmatter="$SCRATCH/$name.yaml"
+    sed -n '1{/^---$/!q};1,/^---$/p' "$1" | sed '1d;$d' > "$frontmatter"
+    grep -qx "name: $name" "$frontmatter" &&
+        uvx check-jsonschema@0.39.0 --schemafile "$PATTERN_SCHEMA" "$frontmatter"
 }
 
 rejects() { ! "$@"; }

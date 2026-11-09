@@ -23,7 +23,7 @@ The devcontainer feature is defined in `/devcontainer-feature/src/ubuntu-dotfile
 
 ## Testing
 
-Run `make test`. It tests the devcontainer feature on Ubuntu 22.04 and the latest Ubuntu release.
+Run `make test`. It tests the devcontainer feature on Ubuntu 22.04 and the latest Ubuntu release. `test/consistency.sh` runs `check-jsonschema` through `uvx`, so `uv` must be installed.
 
 ## Adding or Removing a Component
 

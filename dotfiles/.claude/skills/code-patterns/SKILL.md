@@ -38,8 +38,7 @@ not to apply so "no findings" can be told apart from "not checked".
 
 ## Adding or changing a pattern
 
-Copy the front matter shape of an existing pattern. `test/consistency.sh`
-fails if a required field is missing or empty, `smells` or `not_a_violation`
-is an empty list, a key is unknown, or `name` differs from the filename. The
-body is free-form and is for the author's benefit: put the preferred shape and
-a short example there.
+The front matter must satisfy [the schema](references/pattern.schema.json),
+and `name` must equal the filename without `.md`. `test/consistency.sh`
+checks both. The body is free-form and is for the author's benefit: put the
+preferred shape and a short example there.
