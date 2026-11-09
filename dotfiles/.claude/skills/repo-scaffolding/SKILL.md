@@ -16,7 +16,9 @@ the ecosystem and record the choice in `AGENTS.md`; don't ask which to use.
 ## Gates
 
 - **Typing:** the strictest mode available, plus the extra checks strict mode
-  leaves off. Follow the `code-patterns` skill for data at system boundaries.
+  leaves off. Parse data at system boundaries into types that cannot represent
+  invalid states, rather than validating and passing raw values on; the
+  `code-patterns` skill has the detail.
 - **Linting:** the language's full rule set, minus only rules that conflict
   with the formatter or each other, so new rules are opt-out. Add framework-
   specific linting too (for example React as well as TypeScript), including
