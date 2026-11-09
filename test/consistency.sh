@@ -97,21 +97,47 @@ trap 'rm -rf "$SCRATCH"' EXIT
 # The schema holds the field rules; the filename match is the one rule JSON Schema
 # cannot express. check-jsonschema reads YAML directly, which avoids depending on
 # whichever yq the machine happens to have.
-validate_pattern() {
-    local name frontmatter
-    name="$(basename "$1" .md)"
-    frontmatter="$SCRATCH/$name.yaml"
+pattern_frontmatter() {
+    local frontmatter
+    frontmatter="$SCRATCH/$(basename "$1" .md).yaml"
     sed -n '1{/^---$/!q};1,/^---$/p' "$1" | sed '1d;$d' > "$frontmatter"
-    grep -qx "name: $name" "$frontmatter" &&
-        uvx check-jsonschema@0.39.0 --schemafile "$PATTERN_SCHEMA" "$frontmatter"
+    echo "$frontmatter"
+}
+
+pattern_name_matches() {
+    grep -qx "name: $(basename "$1" .md)" "$(pattern_frontmatter "$1")"
+}
+
+pattern_matches_schema() {
+    uvx check-jsonschema@0.39.0 --schemafile "$PATTERN_SCHEMA" "$(pattern_frontmatter "$1")"
+}
+
+validate_pattern() { pattern_name_matches "$1" && pattern_matches_schema "$1"; }
+
+# check-jsonschema exits 1 for every failure, including a missing file or a uvx that
+# cannot fetch it, so a bare "it failed" would let a broken toolchain pass the negative
+# checks. Requiring the specific schema error proves the schema is what rejected it.
+rejected_by_schema_with() {
+    local expected="$1" output
+    output="$(pattern_matches_schema "$2" 2>&1)" && return 1
+    grep -qF -- "$expected" <<< "$output"
 }
 
 rejects() { ! "$@"; }
 
 check "pattern validator accepts a well-formed pattern" validate_pattern "$FIXTURES_DIR/valid-example.md"
-for fixture in missing-smells empty-not-a-violation unknown-key name-mismatch; do
-    check "pattern validator rejects $fixture" rejects validate_pattern "$FIXTURES_DIR/$fixture.md"
-done
+check "pattern validator rejects missing-smells" \
+    rejected_by_schema_with "'smells' is a required property" "$FIXTURES_DIR/missing-smells.md"
+check "pattern validator rejects empty-not-a-violation" \
+    rejected_by_schema_with "should be non-empty" "$FIXTURES_DIR/empty-not-a-violation.md"
+check "pattern validator rejects unknown-key" \
+    rejected_by_schema_with "Additional properties are not allowed" "$FIXTURES_DIR/unknown-key.md"
+# This fixture is schema-valid, so only the filename rule can reject it.
+check "name-mismatch fixture is valid against the schema" pattern_matches_schema "$FIXTURES_DIR/name-mismatch.md"
+check "pattern validator rejects name-mismatch by filename" rejects pattern_name_matches "$FIXTURES_DIR/name-mismatch.md"
+# An unrelated failure must not be mistaken for the expected rejection.
+check "a different failure is not mistaken for the expected schema error" \
+    rejects rejected_by_schema_with "Additional properties are not allowed" "$FIXTURES_DIR/missing-smells.md"
 
 check "code-patterns skill has at least one pattern" compgen -G "$PATTERNS_DIR/*.md"
 for pattern_file in "$PATTERNS_DIR"/*.md; do
