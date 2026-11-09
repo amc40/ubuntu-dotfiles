@@ -120,6 +120,7 @@ for fixture in missing-smells empty-not-a-violation unknown-key name-mismatch; d
     check "pattern validator rejects $fixture" rejects validate_pattern "$FIXTURES_DIR/$fixture.md"
 done
 
+check "code-patterns skill has at least one pattern" compgen -G "$PATTERNS_DIR/*.md"
 for pattern_file in "$PATTERNS_DIR"/*.md; do
     [ -e "$pattern_file" ] || continue
     check "pattern $(basename "$pattern_file" .md): front matter is well-formed" validate_pattern "$pattern_file"
