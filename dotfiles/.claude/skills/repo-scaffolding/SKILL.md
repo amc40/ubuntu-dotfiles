@@ -16,7 +16,7 @@ The owner will standardise on specific tools when they want to.
 ## Gates
 
 - **Typing:** the strictest mode available, plus the extra checks strict mode
-  leaves off. Validate data at system boundaries.
+  leaves off. Follow the `code-patterns` skill for data at system boundaries.
 - **Linting:** the language's full rule set, minus only rules that conflict
   with the formatter or each other, so new rules are opt-out. Add framework-
   specific linting too (for example React as well as TypeScript), including
