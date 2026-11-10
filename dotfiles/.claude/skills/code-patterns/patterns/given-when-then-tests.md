@@ -5,7 +5,7 @@ principle: Structure each test as given, when, then, and name it with those word
 smells:
   - A test name that does not state context, action and outcome, such as test_checkout, works, test_edge_case or test1.
   - A name that uses given, when and then but a body that does not follow that order, or that interleaves the phases.
-  - More than one action in a single test, or assertions on several unrelated outcomes, so a failure does not identify the behaviour that broke.
+  - More than one action in a single test, or assertions on outcomes that the test name could not state as one behaviour, so a failure does not identify what broke. Several assertions that together describe the one outcome of the single action are fine.
   - A given hidden in shared fixtures or setup, so the test cannot be understood without reading elsewhere.
   - A name that describes the implementation, such as calls_repository_save, instead of the behaviour observed.
   - Conditionals or loops in the test body, or a test with no assertion.

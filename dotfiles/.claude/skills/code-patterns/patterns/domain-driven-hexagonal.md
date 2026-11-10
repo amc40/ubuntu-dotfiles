@@ -5,6 +5,7 @@ principle: Model the business domain in a pure core named in the business's own 
 smells:
   - Domain or application code importing a framework, ORM, HTTP client, vendor SDK, filesystem or environment access directly.
   - A dependency pointing outwards, such as the domain importing from an adapter or infrastructure module, or using a concrete adapter class where a port belongs.
+  - A domain or application function that takes an ORM session, database connection or other infrastructure handle as a parameter, or that commits a transaction itself.
   - Business rules living in controllers, route handlers, ORM models, CLI commands or queries instead of in domain objects or domain services.
   - An anemic domain, where entities are bags of fields and callers enforce the invariants from outside.
   - A port shaped around the technology, such as SqlUserTable or HttpClient, instead of what the domain needs, such as UserRepository, or a port that hands persistence or transport types (rows, DTOs, responses) to the domain.
@@ -14,7 +15,7 @@ smells:
 not_a_violation:
   - Small scripts, CLIs and glue code with no real business logic, where ports and adapters would be ceremony.
   - The composition root, which imports both core and adapters because wiring them together is its job.
-  - Standard-library types and pure value libraries used by the domain, such as dates, decimals and collections.
+  - Standard-library types and pure value libraries used by the domain, such as the date type, decimals and collections. Reading the current time or randomness through them is still a violation.
   - Shell, configuration and dotfiles repositories.
   - Code in a repository whose agreed structure already enforces the layering differently; follow that structure.
 finding_format: Name the misplaced rule or dependency and the layer it belongs in, then the port to introduce, named in domain terms, and the adapter that implements it.
