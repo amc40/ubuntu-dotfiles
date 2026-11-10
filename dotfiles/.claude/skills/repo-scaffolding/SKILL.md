@@ -9,14 +9,16 @@ Maximise **automated** quality gates, so review spends its time on design
 rather than on style, types or missing tests. A rule that lives only in a
 document or in someone's head is not a gate.
 
-These are principles, not a toolchain. Pick the strictest, best-supported tool
-for the ecosystem and record the choice in `AGENTS.md`; don't ask which to use.
-The owner will standardise on specific tools when they want to.
+These are principles, not a toolchain. Use the tool the `tooling-preferences`
+skill names; where it is silent, pick the strictest, best-supported tool for
+the ecosystem and record the choice in `AGENTS.md`; don't ask which to use.
 
 ## Gates
 
 - **Typing:** the strictest mode available, plus the extra checks strict mode
-  leaves off. Validate data at system boundaries.
+  leaves off. Parse data at system boundaries into types that cannot represent
+  invalid states, rather than validating and passing raw values on; the
+  `code-patterns` skill has the detail.
 - **Linting:** the language's full rule set, minus only rules that conflict
   with the formatter or each other, so new rules are opt-out. Add framework-
   specific linting too (for example React as well as TypeScript), including

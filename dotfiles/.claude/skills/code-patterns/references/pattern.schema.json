@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Code pattern front matter",
+  "description": "Front matter of a file in patterns/. The name must also equal the filename without .md, which JSON Schema cannot express; test/consistency.sh checks it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "applies_when", "principle", "smells", "not_a_violation", "finding_format"],
+  "properties": {
+    "name": {
+      "description": "Kebab-case identifier, equal to the filename without .md.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "applies_when": {
+      "description": "What kind of code the pattern is about, so a reviewer can skip patterns that do not apply.",
+      "type": "string",
+      "minLength": 1
+    },
+    "principle": {
+      "description": "The preference in one sentence.",
+      "type": "string",
+      "minLength": 1
+    },
+    "smells": {
+      "description": "Signals that a violation is present; the reviewer's search list.",
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "not_a_violation": {
+      "description": "Cases to leave alone, to keep the rubric from producing noise.",
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "finding_format": {
+      "description": "What a useful finding recommends.",
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}
