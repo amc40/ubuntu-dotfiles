@@ -17,6 +17,7 @@ not_a_violation:
   - Long but flat declarative content such as tables, configuration or test data.
   - Established domain terms or conventions in the codebase, including short names with a standard meaning such as i or x in a mathematical routine.
   - Shell pipelines, which are composed from small tools by design.
+  - The given, when and then markers in tests, which the given-when-then-tests pattern requires.
 finding_format: Name the step to extract and a verb-phrase name for it, and show how the calling function reads afterwards.
 ---
 

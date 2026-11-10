@@ -5,7 +5,7 @@
 2. For involved changes, outline the planned commits and validation steps before committing.
 
 ## Code
-1. Add comments only when they explain **why**, not **what**.
+1. Add comments only when they explain **why**, not **what**, apart from the given/when/then markers that the `given-when-then-tests` pattern requires.
 2. Skip linting rules only after considering alternatives, and explain why in a comment.
 3. Before writing or changing code, follow the `code-patterns` skill for every pattern whose `applies_when` matches.
 

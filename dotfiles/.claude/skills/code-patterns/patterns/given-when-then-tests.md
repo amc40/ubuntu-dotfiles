@@ -9,11 +9,11 @@ smells:
   - A given hidden in shared fixtures or setup, so the test cannot be understood without reading elsewhere.
   - A name that describes the implementation, such as calls_repository_save, instead of the behaviour observed.
   - Conditionals or loops in the test body, or a test with no assertion.
-  - Phases not visibly separated in a test long enough to need it.
+  - A phase not marked with a `# given`, `# when` or `# then` comment, or phases not separated by blank lines. A marker may be left out only for a phase that is genuinely empty, such as a test that needs no given.
 not_a_violation:
   - Parameterised or table-driven tests, where the name template and each case description together carry given, when and then.
   - Property-based tests, where the given is a generated domain; the name should state the property.
-  - A trivial test whose phases collapse into one expression, as long as the name still has all three parts.
+  - A trivial test whose phases collapse into one expression, which needs no markers as long as the name still has all three parts.
   - Tests the diff does not add or change.
 finding_format: Give the test a renamed given, when, then form, and say which step is out of order or which extra action or outcome should move to its own test.
 ---
@@ -24,20 +24,25 @@ Name the test as a sentence, in the style the language uses for test names:
 `given_<context>_when_<action>_then_<outcome>` with underscores, or a string
 such as `"given an expired coupon, when it is applied, then the total is unchanged"`.
 
-Keep the body in the same order and separate the phases with blank lines:
+Keep the body in the same order, mark each phase with a lowercase comment and
+separate the phases with a blank line:
 
 ```python
 def test_given_expired_coupon_when_applied_then_total_is_unchanged():
+    # given
     order = an_order(total=100)
     coupon = an_expired_coupon(percent_off=10)
 
+    # when
     order.apply(coupon)
 
+    # then
     assert order.total == 100
 ```
 
-Phase comments are not needed; the name and the blank lines carry the
-structure, and this repository's rule is that comments explain why.
+These markers are the one exception to the rule that comments explain why and
+not what. They label structure, so the rule that code should not carry "what"
+comments does not apply to them.
 
 One action per test. When a second behaviour needs checking, write a second
 test with its own name rather than adding a second `when`.
