@@ -46,3 +46,38 @@ comments does not apply to them.
 
 One action per test. When a second behaviour needs checking, write a second
 test with its own name rather than adding a second `when`.
+
+## Enforce the name with a linter
+
+In a JavaScript or TypeScript project using Jest, make the naming a lint
+failure rather than a review comment, with `jest/valid-title` from
+`eslint-plugin-jest` (pin its version). For flat test titles:
+
+```js
+"jest/valid-title": ["error", {
+  mustMatch: {
+    it: [
+      "^given .+, when .+, then .+$",
+      "Test names must read: given <context>, when <action>, then <outcome>",
+    ],
+  },
+}],
+```
+
+For nested blocks, where `describe("given …")` contains `describe("when …")`
+containing `it("then …")`:
+
+```js
+"jest/valid-title": ["error", {
+  mustMatch: {
+    describe: ["^(given|when) .+", "describe blocks must start with given or when"],
+    it: ["^then .+", "it blocks must start with then"],
+  },
+}],
+```
+
+Both configurations were run against passing and failing test files with
+eslint 9 and eslint-plugin-jest 29. The rule checks titles only, so the
+markers and the one-action rule still depend on review. In other languages,
+look for a linter rule on test names, and check that a badly named test fails
+the build rather than being silently left out of the run.
