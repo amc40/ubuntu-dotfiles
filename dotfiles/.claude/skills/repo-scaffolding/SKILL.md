@@ -36,7 +36,9 @@ the ecosystem and record the choice in `AGENTS.md`; don't ask which to use.
   end to end) with branch coverage and a separate floor per layer. Coverage must
   come from the right layer, new code must be covered on pull requests, warnings
   are errors, and skipped tests need a reason. Check test quality (mutation or
-  property testing) where it is worth the cost.
+  property testing) where it is worth the cost. Name tests as the
+  `given-when-then-tests` pattern in the `code-patterns` skill describes, and
+  enforce the names with a linter.
 - **Agent docs:** `AGENTS.md` at the root listing the commands and rules. No
   `CLAUDE.md`: Claude Code reads `AGENTS.md` directly, and a `CLAUDE.md` in or
   above the working directory makes it ignore `AGENTS.md` unless that file
