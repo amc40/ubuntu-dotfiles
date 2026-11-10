@@ -24,10 +24,10 @@ the ecosystem and record the choice in `AGENTS.md`; don't ask which to use.
   specific linting too (for example React as well as TypeScript), including
   accessibility for UI.
 - **Formatting:** one formatter, checked in CI and applied by hooks.
-- **Architecture:** enforce structure with a tool, not convention. Use
-  domain-driven design: bounded contexts, layered inwards-only dependencies,
-  a pure domain with no framework or I/O imports, access to other contexts
-  only through their public interface, no import cycles.
+- **Architecture:** enforce structure with a tool, not convention. The shape
+  is the `domain-driven-hexagonal` pattern in the `code-patterns` skill; the
+  tool must fail the build on outward dependencies, framework or I/O imports
+  in the domain, access to another context's internals, and import cycles.
 - **Dependencies:** unused, missing and misplaced dependencies flagged; lockfile
   kept in sync.
 - **Security:** secret scanning, known-vulnerable dependencies, static analysis
