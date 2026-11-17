@@ -47,6 +47,13 @@ the ecosystem and record the choice in `AGENTS.md`; don't ask which to use.
 Websites use Astro. MCP servers use FastMCP in Python. Use something else only
 if the repo already does or the request says so.
 
+Interactive web apps, where nearly every screen is behind a login and holds
+client state across navigation (a PWA, a dashboard, a tool), use a Vite +
+React single-page app instead of Astro. Astro's page-per-navigation model
+resets that state, its islands cannot share React context, and static output
+cannot prebuild routes for user data, so it would end up as one React island
+with a router and add a layer that does nothing.
+
 ## Wiring
 
 - **One command runs every gate** (`make check` or the stack's equivalent), and
