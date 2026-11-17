@@ -16,7 +16,7 @@
 ## PRs
 1. After raising a PR, ensure checks pass and investigate failures with `gh run view`.
 2. PRs should link to any GitHub issues they address.
-3. PRs that change the UI should include screenshots of the changes, and PRs that change user journeys should include before and after diagrams of them.
+3. PRs that change the UI should include screenshots of the changes, and PRs that change user journeys or the architecture should include before and after diagrams of them.
 4. Before raising a PR, run an available code review workflow if one has not been run recently, and a `pattern-reviewer` subagent pass where available.
 5. Commit fixes for review findings as `--fixup` commits, then autosquash them (`GIT_SEQUENCE_EDITOR=true git rebase -i --autosquash <base>`) and update the branch with `git push --force-with-lease`.
 6. After autosquashing, delegate a quick check to a subagent (`commit-message-checker` where available) that each commit message and the PR description accurately describe what that commit or PR actually changes, and fix any mismatch by rewording.
