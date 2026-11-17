@@ -31,12 +31,14 @@ This repo must be reachable from the environment.
 
 ## Devcontainer feature
 
+The feature is published as `ghcr.io/amc40/ubuntu-dotfiles/ubuntu-dotfiles` (the publishing action prefixes feature IDs with the repo name). `ghcr.io/amc40/ubuntu-dotfiles` without the suffix is the [Docker image](#docker), not the feature.
+
 The feature installs Claude Code by default. Select Codex or skip coding-agent installation with its `agent` option:
 
 ```json
 {
   "features": {
-    "ghcr.io/amc40/ubuntu-dotfiles:latest": {
+    "ghcr.io/amc40/ubuntu-dotfiles/ubuntu-dotfiles:latest": {
       "agent": "codex"
     }
   }
@@ -57,7 +59,7 @@ For example, just the Claude config:
 ```json
 {
   "features": {
-    "ghcr.io/amc40/ubuntu-dotfiles:latest": {
+    "ghcr.io/amc40/ubuntu-dotfiles/ubuntu-dotfiles:latest": {
       "installZsh": false,
       "installTmux": false,
       "cloneRepo": false
