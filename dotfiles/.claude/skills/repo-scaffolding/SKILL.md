@@ -54,6 +54,16 @@ resets that state, its islands cannot share React context, and static output
 cannot prebuild routes for user data, so it would end up as one React island
 with a router and add a layer that does nothing.
 
+## Dev environment
+
+Everything runs in a devcontainer: a `.devcontainer/devcontainer.json` that
+installs the repo's toolchain, so a fresh clone needs only a container runtime.
+Commands, gates, hooks and agent sessions run inside it, and CI uses the same
+definition, so "works on my machine" and CI drift are not possible. Install
+this repo's own `ubuntu-dotfiles` devcontainer feature so the owner's shell and
+agent configuration come with it. When auditing an existing repo, a missing
+devcontainer is a missing gate.
+
 ## Wiring
 
 - **One command runs every gate** (`make check` or the stack's equivalent), and
@@ -86,6 +96,6 @@ why, and unused suppressions fail the build.
 
 ## Done
 
-The one command passes from a fresh clone, CI is green including the aggregate
+The one command passes from a fresh clone inside the devcontainer, CI is green including the aggregate
 job, every gate has been shown to fail on a violation, and `AGENTS.md` tells the
 next contributor, human or agent, every command and rule they need.
